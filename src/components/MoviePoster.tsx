@@ -1,27 +1,35 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {useNavigation} from '@react-navigation/core';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Movie} from '../interfaces/movieInterface';
 
 interface Props {
   movie: Movie;
+  height?: number;
+  width?: number;
 }
 
-export const MoviePoster = ({movie}: Props) => {
+export const MoviePoster = ({movie, height = 350, width = 200}: Props) => {
   const uri = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
 
-  // console.log(movie.poster_path);
+  const navigation = useNavigation();
 
   return (
-    <View
-      // eslint-disable-next-line react-native/no-inline-styles
+    <TouchableOpacity
+      onPress={() => navigation.navigate('DetailScreen', movie)}
       style={{
-        width: 200,
-        height: 420,
-      }}>
+        width,
+        height,
+        marginHorizontal: 2,
+        paddingBottom: 20,
+        paddingHorizontal: 7,
+      }}
+      activeOpacity={0.8}>
       <View style={styles.imageContainer}>
         <Image source={{uri}} style={styles.image} />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

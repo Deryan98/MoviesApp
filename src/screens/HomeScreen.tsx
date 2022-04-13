@@ -1,24 +1,24 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useEffect} from 'react';
-import {Button, Text, View} from 'react-native';
-import movieDB from '../api/movieDB';
+// import {useNavigation} from '@react-navigation/native';
+import React from 'react';
+import {ActivityIndicator, Text, View} from 'react-native';
+import {useMovies} from '../hooks/useMovies';
 
 const HomeScreen = () => {
-  //   const navigation = useNavigation();
+  const {peliculasEnCine, isLoading} = useMovies();
 
-  useEffect(() => {
-    movieDB.get('/now_playing').then(resp => {
-      console.log(resp.data);
-    });
-  }, []);
+  if (isLoading) {
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <ActivityIndicator color="red" size={100} />
+      </View>
+    );
+  }
+
+  console.log(peliculasEnCine[2]?.title);
 
   return (
     <View>
       <Text>HomeScreen</Text>
-      {/* <Button
-        title="ir detalle"
-        onPress={() => navigation.navigate('DetailScreen')}
-      /> */}
     </View>
   );
 };

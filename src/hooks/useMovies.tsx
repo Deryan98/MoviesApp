@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react';
 import movieDB from '../api/movieDB';
-import {MovieDBNowPlaying} from '../interfaces/movieInterface';
+import {Movie, MovieDBNowPlaying} from '../interfaces/movieInterface';
 
 export const useMovies = () => {
-  const [peliculasEnCine, setPeliculasEnCine] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [peliculasEnCine, setPeliculasEnCine] = useState<Movie[]>([]);
 
   const getMovies = async () => {
     const resp = await movieDB.get<MovieDBNowPlaying>('/now_playing');
@@ -13,7 +13,6 @@ export const useMovies = () => {
   };
 
   useEffect(() => {
-    // now_playing
     getMovies();
   }, []);
 

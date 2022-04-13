@@ -13,7 +13,7 @@ export interface Dates {
   minimum: string;
 }
 
-export interface Result {
+export interface Movie {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];

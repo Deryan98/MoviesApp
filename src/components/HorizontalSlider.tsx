@@ -10,9 +10,10 @@ const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
 interface Props {
   title?: string;
   movies: Movie[];
+  horizontal?: boolean;
 }
 
-export const HorizontalSlider = ({title, movies}: Props) => {
+export const HorizontalSlider = ({title, movies, horizontal = true}: Props) => {
   return (
     <View
       style={{
@@ -35,7 +36,7 @@ export const HorizontalSlider = ({title, movies}: Props) => {
           <MoviePoster movie={item} width={140} height={200} />
         )}
         keyExtractor={item => item.id.toString()}
-        horizontal={true}
+        horizontal={horizontal}
         showsHorizontalScrollIndicator={false}
       />
     </View>

@@ -8,6 +8,13 @@ export interface MovieDBMoviesResponse {
   total_results: number;
 }
 
+export interface SearchMovies {
+  page: number;
+  results: Movie[];
+  total_pages: number;
+  total_results: number;
+}
+
 export interface Dates {
   maximum: string;
   minimum: string;

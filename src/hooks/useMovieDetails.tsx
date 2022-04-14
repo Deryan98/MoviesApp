@@ -16,12 +16,12 @@ export const useMovieDetails = (movieId: number) => {
     cast: [],
   });
 
-  console.log('El IDIDDSJKADA');
-  console.log(movieId);
-
+  const prefix = '/movie';
   const getMovieDetails = async () => {
-    const movieDetailsPromise = movieDB.get<MovieFull>(`/${movieId}`);
-    const castPromise = movieDB.get<CreditsResponse>(`/${movieId}/credits`);
+    const movieDetailsPromise = movieDB.get<MovieFull>(`${prefix}/${movieId}`);
+    const castPromise = movieDB.get<CreditsResponse>(
+      `${prefix}/${movieId}/credits`,
+    );
 
     const [movieDetailsResp, castPromiseResp] = await Promise.all([
       movieDetailsPromise,

@@ -5,18 +5,15 @@ import {ActivityIndicator, View, Dimensions, ScrollView} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import Carousel from 'react-native-snap-carousel';
-import {HeaderBar} from '../components/HeaderBar';
 import {HorizontalSlider} from '../components/HorizontalSlider';
 
 import {MoviePoster} from '../components/MoviePoster';
-import {useMovies} from '../hooks/useMovies';
+import {useMovieSearch} from '../hooks/useMovieSearch';
 
 const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
 
-const HomeScreen = () => {
-  const {nowPlaying, popular, topRated, upcoming, isLoading} = useMovies();
-
-  const [query, setQuery] = React.useState('');
+const SearchScreen = () => {
+  const {searchMovie, isLoading} = useMovieSearch();
 
   const {top} = useSafeAreaInsets();
 
@@ -29,15 +26,10 @@ const HomeScreen = () => {
     );
   }
 
-  const handleKeyPress = val => {
-    setQuery(val);
-  };
-
   return (
     <ScrollView>
-      {/* <HeaderBar handleKeyPress={handleKeyPress} /> */}
       <View style={{marginTop: top + 20}}>
-        {/* Carosel Principal */}
+        {/* Carosel Principal
         <View style={{height: windowHeight / 2}}>
           <Carousel
             data={nowPlaying}
@@ -46,13 +38,16 @@ const HomeScreen = () => {
             itemWidth={200}
             inactiveSlideOpacity={0.9}
           />
-        </View>
-        <HorizontalSlider title="Popular" movies={popular} />
-        <HorizontalSlider title="Top Rated" movies={topRated} />
-        <HorizontalSlider title="Upcoming" movies={upcoming} />
+        </View> */}
+        <HorizontalSlider
+          title="Popular"
+          movies={searchMovie}
+          horizontal={false}
+        />
+        ]
       </View>
     </ScrollView>
   );
 };
 
-export default HomeScreen;
+export default SearchScreen;

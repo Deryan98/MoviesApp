@@ -1,20 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {TouchableOpacity, StyleSheet, Text} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {Button} from 'react-native-elements';
-
-export const UI1Button = ({
-  title = 'Enter',
-  style = {},
-  textStyle = {},
-  onPress,
-}) => {
-  return (
-    <TouchableOpacity onPress={onPress} style={[styles.button, style]}>
-      <Text style={[styles.text, textStyle]}>{title}</Text>
-    </TouchableOpacity>
-  );
-};
 
 export const UIButton = ({
   title = '',
@@ -29,7 +16,7 @@ export const UIButton = ({
       type={type}
       buttonStyle={styles.UIBtnStyle}
       titleStyle={{
-        color: 'black',
+        color: 'white',
         fontWeight: 'bold',
         width: '70%',
         height: '100%',
@@ -61,10 +48,11 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     marginTop: 20,
     marginBottom: 20,
+    backgroundColor: 'black',
   },
   text: {
     fontSize: 16,
     textTransform: 'uppercase',
-    color: '#FFFFFF',
+    color: 'white',
   },
 });

@@ -19,11 +19,19 @@ export const useMovies = () => {
   });
 
   const getMovies = async () => {
-    const nowPlayingPromise =
-      movieDB.get<MovieDBMoviesResponse>('/now_playing');
-    const popularPromise = movieDB.get<MovieDBMoviesResponse>('/popular');
-    const topRatedPromise = movieDB.get<MovieDBMoviesResponse>('/top_rated');
-    const upcomingPromise = movieDB.get<MovieDBMoviesResponse>('/upcoming');
+    const prefix = '/movie';
+    const nowPlayingPromise = movieDB.get<MovieDBMoviesResponse>(
+      `${prefix}/now_playing`,
+    );
+    const popularPromise = movieDB.get<MovieDBMoviesResponse>(
+      `${prefix}/popular`,
+    );
+    const topRatedPromise = movieDB.get<MovieDBMoviesResponse>(
+      `${prefix}/top_rated`,
+    );
+    const upcomingPromise = movieDB.get<MovieDBMoviesResponse>(
+      `${prefix}/upcoming`,
+    );
 
     const resps = await Promise.all([
       nowPlayingPromise,

@@ -6,33 +6,21 @@ import {Movie} from '../interfaces/movieInterface';
 import LoginScreen from '../screens/LoginScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SplashScreen from 'react-native-splash-screen';
+import SearchScreen from '../screens/SearchScreen';
 
 export type RootStackParams = {
   HomeScreen: undefined;
   DetailScreen: Movie;
   LoginScreen: undefined;
+  SearchScreen: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParams>();
 
 export const Navigation = () => {
-  const [isSignedIn, setIsSignedIn] = React.useState(false);
   React.useEffect(() => {
     SplashScreen.hide();
   }, []);
-
-  React.useEffect(() => {
-    getToken();
-  }, [isSignedIn]);
-
-  const getToken = async () => {
-    try {
-      const token = await AsyncStorage.getItem('@token');
-      setIsSignedIn(token != null ? true : false);
-    } catch (e) {
-      console.log({e});
-    }
-  };
 
   return (
     <Stack.Navigator
@@ -42,22 +30,23 @@ export const Navigation = () => {
           // backgroundColor: 'white',
         },
       }}>
-      {!isSignedIn ? (
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
-      ) : (
-        <>
-          <Stack.Screen
-            name="HomeScreen"
-            component={HomeScreen}
-            options={{title: 'Movies Home', headerShown: true}}
-          />
-          <Stack.Screen
-            name="DetailScreen"
-            component={DetailScreen}
-            options={{title: 'Details'}}
-          />
-        </>
-      )}
+      <Stack.Screen name="LoginScreen" component={LoginScreen} />
+      <Stack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{title: 'Movies Home'}}
+      />
+
+      <Stack.Screen
+        name="DetailScreen"
+        component={DetailScreen}
+        options={{title: 'Details'}}
+      />
+      <Stack.Screen
+        name="SearchScreen"
+        component={SearchScreen}
+        options={{title: 'Search'}}
+      />
     </Stack.Navigator>
   );
 };

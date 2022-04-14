@@ -1,6 +1,16 @@
+/* eslint-disable react-native/no-inline-styles */
 import {StackScreenProps} from '@react-navigation/stack';
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, Alert, Keyboard} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Alert,
+  Keyboard,
+  Image,
+  Text,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 
 import loginApi from '../api/loginApi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -21,6 +31,7 @@ const LoginScreen = ({navigation}: Props) => {
     AsyncStorage.getItem('@token')
       .then(token => {
         console.log({token});
+        if (token) navigation.navigate('HomeScreen');
       })
       .catch(err => {
         console.log({err});
@@ -49,31 +60,48 @@ const LoginScreen = ({navigation}: Props) => {
   };
 
   return (
-    <View style={styles.screen}>
-      {/* <Image style={styles.logoImage} source={require('../assets/logo.png')} /> */}
+    <KeyboardAvoidingView
+      style={{flex: 1}}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <View style={styles.screen}>
+        <Image
+          style={styles.logoImage}
+          source={require('../assets/logo.png')}
+        />
+        <Text
+          style={{
+            marginBottom: '10%',
+            color: 'black',
+            fontSize: 24,
+            fontWeight: 'bold',
+          }}>
+          Movies App
+        </Text>
 
-      <UIInput
-        placeholder="Email"
-        leftIconName="email"
-        autoCapitalize="none"
-        textContentType="emailAddress"
-        onChangeText={value => onChange(value, 'email')}
-      />
+        <UIInput
+          placeholder="Email"
+          leftIconName="email"
+          autoCapitalize="none"
+          textContentType="emailAddress"
+          keyboardType="email-address"
+          onChangeText={value => onChange(value, 'email')}
+        />
 
-      <UIInput
-        placeholder="Password"
-        secureTextEntry={true}
-        leftIconName="lock"
-        onChangeText={value => onChange(value, 'password')}
-      />
+        <UIInput
+          placeholder="Password"
+          secureTextEntry={true}
+          leftIconName="lock"
+          onChangeText={value => onChange(value, 'password')}
+        />
 
-      <UIButton
-        title="Login"
-        btnColor="black"
-        type="outline"
-        onPress={() => onLogin()}
-      />
-    </View>
+        <UIButton
+          title="LOGIN"
+          btnColor="black"
+          type="solid"
+          onPress={() => onLogin()}
+        />
+      </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -88,9 +116,11 @@ const styles = StyleSheet.create({
   },
 
   logoImage: {
-    margin: '10%',
-    width: 200,
-    height: 200,
+    margin: '5%',
+    marginBottom: '2%',
+    width: 100,
+    height: 100,
+    borderRadius: 20,
   },
 
   buttonStyle: {

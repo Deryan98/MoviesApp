@@ -13,13 +13,16 @@
     "@react-native-masked-view/masked-view": "^0.2.6",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/stack": "^6.2.1",
+    "@types/currency-formatter": "^1.5.1",
     "axios": "^0.26.1",
+    "currency-formatter": "^1.5.9",
     "react": "17.0.2",
     "react-native": "0.68.0",
     "react-native-gesture-handler": "^2.3.2",
     "react-native-safe-area-context": "^4.2.4",
     "react-native-screens": "^3.13.1",
-    "react-native-snap-carousel": "^3.9.1"
+    "react-native-snap-carousel": "^3.9.1",
+    "react-native-vector-icons": "^9.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -28,6 +31,7 @@
     "@types/jest": "^26.0.23",
     "@types/react-native": "^0.67.3",
     "@types/react-native-snap-carousel": "^3.8.5",
+    "@types/react-native-vector-icons": "^6.4.10",
     "@types/react-test-renderer": "^17.0.1",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",

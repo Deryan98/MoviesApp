@@ -34,6 +34,8 @@ The project uses open source third-party libraries, which allow us to avoid rein
 
 To install the libraries open a console that uses the node "npm" package manager and type in the console: `npm install`
 
+Instead i rather use yarn for local dependencies, make sure to have yarn installed [yarn](https://classic.yarnpkg.com/lang/en/docs/cli/install/) then run `yarn install`
+
 This process may take some time as it will download all these dependencies and store them in the "node_modules" folder located at the root of the project.
 
 ## Lifting the app.

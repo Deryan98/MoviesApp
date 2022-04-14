@@ -3,25 +3,49 @@ import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from '../screens/HomeScreen';
 import DetailScreen from '../screens/DetailScreen';
 import {Movie} from '../interfaces/movieInterface';
+import LoginScreen from '../screens/LoginScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export type RootStackParams = {
   HomeScreen: undefined;
   DetailScreen: Movie;
+  LoginScreen: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParams>();
 
 export const Navigation = () => {
+  const [isSignedIn, setIsSignedIn] = React.useState(false);
+
+  React.useEffect(() => {
+    getToken();
+  }, [isSignedIn]);
+
+  const getToken = async () => {
+    try {
+      const token = await AsyncStorage.getItem('@token');
+      setIsSignedIn(token != null ? true : false);
+    } catch (e) {
+      console.log({e});
+    }
+  };
+
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
         cardStyle: {
           // backgroundColor: 'white',
         },
       }}>
-      <Stack.Screen name="HomeScreen" component={HomeScreen} />
-      <Stack.Screen name="DetailScreen" component={DetailScreen} />
+      {!isSignedIn ? (
+        <Stack.Screen name="LoginScreen" component={LoginScreen} />
+      ) : (
+        <>
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
+          <Stack.Screen name="DetailScreen" component={DetailScreen} />
+        </>
+      )}
     </Stack.Navigator>
   );
 };

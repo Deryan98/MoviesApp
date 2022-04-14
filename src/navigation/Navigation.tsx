@@ -33,7 +33,7 @@ export const Navigation = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: true,
+        headerShown: false,
         cardStyle: {
           // backgroundColor: 'white',
         },
@@ -42,8 +42,16 @@ export const Navigation = () => {
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
       ) : (
         <>
-          <Stack.Screen name="HomeScreen" component={HomeScreen} />
-          <Stack.Screen name="DetailScreen" component={DetailScreen} />
+          <Stack.Screen
+            name="HomeScreen"
+            component={HomeScreen}
+            options={{title: 'Movies Home', headerShown: true}}
+          />
+          <Stack.Screen
+            name="DetailScreen"
+            component={DetailScreen}
+            options={{title: 'Details'}}
+          />
         </>
       )}
     </Stack.Navigator>

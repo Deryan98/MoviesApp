@@ -5,6 +5,7 @@ import DetailScreen from '../screens/DetailScreen';
 import {Movie} from '../interfaces/movieInterface';
 import LoginScreen from '../screens/LoginScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import SplashScreen from 'react-native-splash-screen';
 
 export type RootStackParams = {
   HomeScreen: undefined;
@@ -16,6 +17,9 @@ const Stack = createStackNavigator<RootStackParams>();
 
 export const Navigation = () => {
   const [isSignedIn, setIsSignedIn] = React.useState(false);
+  React.useEffect(() => {
+    SplashScreen.hide();
+  }, []);
 
   React.useEffect(() => {
     getToken();

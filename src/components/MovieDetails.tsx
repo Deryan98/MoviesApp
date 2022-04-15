@@ -6,13 +6,16 @@ import {Cast} from '../interfaces/creditsInterface';
 import {MovieFull} from '../interfaces/movieInterface';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {CastItem} from './CastItem';
+import {HorizontalSlider} from './HorizontalSlider';
+import {MovieRecomm} from '../interfaces/RecommendedInterface';
 
 interface Props {
   movieFull: MovieFull;
   cast: Cast[];
+  recommended: MovieRecomm[];
 }
 
-export const MovieDetails = ({movieFull, cast}: Props) => {
+export const MovieDetails = ({movieFull, cast, recommended}: Props) => {
   return (
     <>
       {/* Detalles */}
@@ -79,6 +82,7 @@ export const MovieDetails = ({movieFull, cast}: Props) => {
           showsHorizontalScrollIndicator={false}
           style={{marginTop: 10, height: 80}}
         />
+        <HorizontalSlider title="Suggested" movies={recommended} />
       </View>
     </>
   );

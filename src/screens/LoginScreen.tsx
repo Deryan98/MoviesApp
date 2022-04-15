@@ -31,7 +31,7 @@ const LoginScreen = ({navigation}: Props) => {
     AsyncStorage.getItem('@token')
       .then(token => {
         console.log({token});
-        if (token) navigation.navigate('HomeScreen');
+        if (token) navigation.replace('HomeScreen');
       })
       .catch(err => {
         console.log({err});

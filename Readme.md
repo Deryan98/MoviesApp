@@ -59,5 +59,3 @@ The following will happen:
 3. It will install the application on the Android device and will depend entirely on Metro Bundler. This means that the application is configured for the development environment, and not for a production environment.
 
 4. Once installed, the application will start running on your device.
-
-> Note that the command used is a shortening of the official command used in the documentation with react native cli: `react-native run-android` or if you did not install this tool globally you can use it from the "node_modules" folder by prepending the npx command: `npx react-native run-android`.

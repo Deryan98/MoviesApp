@@ -10,6 +10,7 @@ import {
   Text,
   KeyboardAvoidingView,
   Platform,
+  ScrollView,
 } from 'react-native';
 
 import loginApi from '../api/loginApi';
@@ -30,7 +31,7 @@ const LoginScreen = ({navigation}: Props) => {
   useEffect(() => {
     AsyncStorage.getItem('@token')
       .then(token => {
-        token && navigation.replace('HomeScreen');
+        if (token) navigation.replace('HomeScreen');
       })
       .catch(err => {
         err;
@@ -58,44 +59,49 @@ const LoginScreen = ({navigation}: Props) => {
     <KeyboardAvoidingView
       style={{flex: 1}}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <View style={styles.screen}>
-        <Image
-          style={styles.logoImage}
-          source={require('../assets/logo.png')}
-        />
-        <Text
-          style={{
-            marginBottom: '10%',
-            color: 'black',
-            fontSize: 24,
-            fontWeight: 'bold',
-          }}>
-          Movies App
-        </Text>
+      <ScrollView
+        contentContainerStyle={{flexGrow: 1}}
+        keyboardShouldPersistTaps="handled">
+        <View style={styles.screen}>
+          <Image
+            style={styles.logoImage}
+            source={require('../assets/logo.png')}
+          />
+          <Text
+            style={{
+              marginBottom: '10%',
+              color: 'black',
+              fontSize: 24,
+              fontWeight: 'bold',
+            }}>
+            Movies App
+          </Text>
 
-        <UIInput
-          placeholder="Email"
-          leftIconName="email"
-          autoCapitalize="none"
-          textContentType="emailAddress"
-          keyboardType="email-address"
-          onChangeText={value => onChange(value, 'email')}
-        />
+          <UIInput
+            placeholder="Email"
+            leftIconName="email"
+            autoCapitalize="none"
+            textContentType="emailAddress"
+            keyboardType="email-address"
+            onChangeText={value => onChange(value, 'email')}
+            returnKeyType="next"
+          />
 
-        <UIInput
-          placeholder="Password"
-          secureTextEntry={true}
-          leftIconName="lock"
-          onChangeText={value => onChange(value, 'password')}
-        />
+          <UIInput
+            placeholder="Password"
+            secureTextEntry={true}
+            leftIconName="lock"
+            onChangeText={value => onChange(value, 'password')}
+          />
 
-        <UIButton
-          title="LOGIN"
-          btnColor="black"
-          type="solid"
-          onPress={() => onLogin()}
-        />
-      </View>
+          <UIButton
+            title="LOGIN"
+            btnColor="black"
+            type="solid"
+            onPress={() => onLogin()}
+          />
+        </View>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };

@@ -1,15 +1,17 @@
-/* eslint-disable react-native/no-inline-styles */
-// import {useNavigation} from '@react-navigation/native';
 import {useRoute} from '@react-navigation/native';
 import React from 'react';
-import {ActivityIndicator, View, Dimensions, ScrollView} from 'react-native';
+import {
+  ActivityIndicator,
+  View,
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {VerticalSlider} from '../components/VerticalSlider';
 
 import {useMoviesSearch} from '../hooks/useMovieSearch';
-
-const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
 
 const SearchScreen = () => {
   const {moviesSearch, isLoading} = useMoviesSearch();
@@ -21,8 +23,7 @@ const SearchScreen = () => {
 
   if (isLoading) {
     return (
-      // eslint-disable-next-line react-native/no-inline-styles
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={styles.container}>
         <ActivityIndicator color="red" size={100} />
       </View>
     );
@@ -32,7 +33,7 @@ const SearchScreen = () => {
     <ScrollView>
       <View style={{marginTop: top + 20}}>
         <VerticalSlider
-          title={query}
+          title={query && query.toString()}
           movies={moviesSearch}
           horizontal={false}
         />
@@ -40,5 +41,9 @@ const SearchScreen = () => {
     </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {flex: 1, justifyContent: 'center', alignItems: 'center'},
+});
 
 export default SearchScreen;

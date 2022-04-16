@@ -1,5 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
-// import {useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {
   ActivityIndicator,
@@ -8,8 +7,6 @@ import {
   ScrollView,
   StyleSheet,
 } from 'react-native';
-import {Text} from 'react-native-elements';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import Carousel from 'react-native-snap-carousel';
 import {HeaderBar} from '../components/HeaderBar';
@@ -21,28 +18,38 @@ import {useMovies} from '../hooks/useMovies';
 const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
+
   const {nowPlaying, popular, topRated, upcoming, isLoading} = useMovies();
 
   const [query, setQuery] = React.useState('');
-
-  const {top} = useSafeAreaInsets();
-
-  if (isLoading) {
-    return (
-      // eslint-disable-next-line react-native/no-inline-styles
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <ActivityIndicator color="red" size={100} />
-      </View>
-    );
-  }
 
   const handleKeyPress = (val: React.SetStateAction<string>) => {
     setQuery(val);
   };
 
+  const triggerQuery = () => {
+    navigation.push('SearchScreen', query);
+    setQuery('');
+    return;
+  };
+
+  if (isLoading) {
+    return (
+      <View style={styles.indicatorContainer}>
+        <ActivityIndicator color="red" size={100} />
+      </View>
+    );
+  }
+
   return (
     <ScrollView>
-      <HeaderBar query={query} handleKeyPress={handleKeyPress} />
+      <HeaderBar
+        query={query}
+        handleKeyPress={handleKeyPress}
+        triggerQuery={triggerQuery}
+      />
+      {/* eslint-disable-next-line react-native/no-inline-styles */}
       <View style={{marginTop: 30}}>
         {/* Carosel Principal */}
         <View style={{height: windowHeight * 0.45}}>
@@ -70,6 +77,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 10,
     marginVertical: 10,
+  },
+  indicatorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../constants/Colors';
 import {useNavigation} from '@react-navigation/native';
 
-const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
+const {height: windowHeight} = Dimensions.get('window');
 
 interface Props {
   title?: string;
@@ -16,7 +16,7 @@ interface Props {
   horizontal?: boolean;
 }
 
-export const VerticalSlider = ({title, movies, horizontal = true}: Props) => {
+export const VerticalSlider = ({title, movies}: Props) => {
   const navigation = useNavigation();
 
   return (
@@ -34,7 +34,6 @@ export const VerticalSlider = ({title, movies, horizontal = true}: Props) => {
               name="arrow-back"
               backgroundColor={Colors.accentColor}
               onPress={() => {
-                // console.log({query});
                 return navigation.pop();
               }}
               size={40}

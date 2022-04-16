@@ -22,9 +22,7 @@ export const MovieDetails = ({movieFull, cast, recommended}: Props) => {
       <View style={{marginHorizontal: 20}}>
         <View style={{flexDirection: 'row'}}>
           <Icon name="star-outline" color="grey" size={16} />
-
           <Text style={{color: 'black'}}>{movieFull.vote_average}</Text>
-
           <Text style={{marginLeft: 5, color: 'black'}}>
             - {movieFull.genres.map(genre => genre.name).join(', ')}
           </Text>
@@ -82,6 +80,8 @@ export const MovieDetails = ({movieFull, cast, recommended}: Props) => {
           showsHorizontalScrollIndicator={false}
           style={{marginTop: 10, height: 80}}
         />
+
+        {/* Suggested */}
         <HorizontalSlider title="Suggested" movies={recommended} />
       </View>
     </>

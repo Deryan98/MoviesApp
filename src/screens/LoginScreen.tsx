@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import {StackScreenProps} from '@react-navigation/stack';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -30,18 +30,14 @@ const LoginScreen = ({navigation}: Props) => {
   useEffect(() => {
     AsyncStorage.getItem('@token')
       .then(token => {
-        console.log({token});
-        if (token) navigation.replace('HomeScreen');
+        token && navigation.replace('HomeScreen');
       })
       .catch(err => {
-        console.log({err});
+        err;
       });
   }, []);
 
-  //   const checkToken = ()
-
   const Login = async () => {
-    console.log('antes del desastre');
     try {
       const resp = await loginApi.post('/login', {
         email,
@@ -56,7 +52,6 @@ const LoginScreen = ({navigation}: Props) => {
   const onLogin = () => {
     Keyboard.dismiss();
     Login();
-    // navigation.replace('HomeScreen');
   };
 
   return (

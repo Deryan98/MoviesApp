@@ -3,12 +3,19 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Button} from 'react-native-elements';
 
+interface Props {
+  title: string;
+  btnColor: string;
+  type: string;
+  onPress: any;
+}
+
 export const UIButton = ({
   title = '',
   btnColor = 'black',
   type = 'solid',
   onPress,
-}) => {
+}: Props) => {
   return (
     <Button
       title={title}

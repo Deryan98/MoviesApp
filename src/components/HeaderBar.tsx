@@ -1,65 +1,72 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
+import {StyleSheet} from 'react-native';
 import {Header, Input, Text} from 'react-native-elements';
-import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../constants/Colors';
 
 interface Props {
   handleKeyPress: (text: string) => void;
+  triggerQuery: any;
   query: string;
 }
 
-export const HeaderBar = ({handleKeyPress, query}: Props) => {
-  const navigation = useNavigation();
-
+export const HeaderBar = ({handleKeyPress, triggerQuery}: Props) => {
   return (
     <Header
       backgroundColor={Colors.primayColor}
-      containerStyle={{
-        marginTop: 5,
-      }}
-      leftComponent={
-        <Text style={{color: Colors.accentColor, fontSize: 20}}>Home</Text>
-      }
-      leftContainerStyle={{
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-      }}
+      containerStyle={styles.containerStyle}
+      leftComponent={<Text style={styles.homeText}>Home</Text>}
+      leftContainerStyle={styles.leftContainerStyle}
       centerComponent={
         <Input
           placeholder="Buscar"
           placeholderTextColor="a"
           selectionColor="yellowgreen"
-          autoFocus={true}
-          containerStyle={{
-            width: '90%',
-            height: 50,
-            justifyContent: 'flex-start',
-            alignItems: 'center',
-          }}
+          onSubmitEditing={triggerQuery}
+          returnKeyLabel="Buscar"
+          returnKeyType="search"
+          containerStyle={styles.inputContainerStyle}
           rightIcon={
             <Icon
               name="search"
               backgroundColor={Colors.accentColor}
-              onPress={() => {
-                // console.log({query});
-                return navigation.push('SearchScreen', query);
-              }}
+              onPress={() => triggerQuery()}
               size={30}
               color={Colors.accentColor}
-              iconStyle={{
-                borderRadius: 30,
-              }}
+              iconStyle={styles.iconStyle}
             />
           }
           onChangeText={value => handleKeyPress(value)}
-          inputStyle={{
-            color: Colors.accentColor,
-          }}
+          inputStyle={styles.inputStyle}
           autoCompleteType={undefined}
         />
       }
     />
   );
 };
+
+const styles = StyleSheet.create({
+  containerStyle: {
+    marginTop: 5,
+  },
+  homeText: {
+    color: Colors.accentColor,
+    fontSize: 20,
+  },
+  leftContainerStyle: {
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  inputContainerStyle: {
+    width: '90%',
+    height: 50,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  iconStyle: {
+    borderRadius: 30,
+  },
+  inputStyle: {
+    color: Colors.accentColor,
+  },
+});

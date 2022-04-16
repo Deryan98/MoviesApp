@@ -7,7 +7,6 @@ import {MoviePoster} from './MoviePoster';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../constants/Colors';
 import {useNavigation} from '@react-navigation/native';
-import CategoryGridTile from './CategoryGridTile';
 
 const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
 
@@ -19,23 +18,6 @@ interface Props {
 
 export const VerticalSlider = ({title, movies, horizontal = true}: Props) => {
   const navigation = useNavigation();
-
-  const renderGridItem = itemData => {
-    return (
-      <CategoryGridTile
-        title={itemData.item.title}
-        color={'itemData.item.color'}
-        onSelect={() => {
-          props.navigation.navigate({
-            routeName: 'CategoryMeals',
-            params: {
-              categoryId: itemData.item.id,
-            },
-          });
-        }}
-      />
-    );
-  };
 
   return (
     <View
@@ -80,7 +62,7 @@ export const VerticalSlider = ({title, movies, horizontal = true}: Props) => {
           <MoviePoster movie={item} width={140} height={200} />
         )}
         keyExtractor={item => item.id.toString()}
-        horizontal={false}
+        numColumns={3}
         showsHorizontalScrollIndicator={false}
       />
     </View>

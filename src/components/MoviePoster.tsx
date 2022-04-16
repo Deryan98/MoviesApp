@@ -21,7 +21,7 @@ export const MoviePoster = ({movie, height = 350, width = 200}: Props) => {
       style={{
         width,
         height,
-        marginHorizontal: 2,
+        marginHorizontal: 0,
         paddingBottom: 20,
         paddingHorizontal: 7,
       }}

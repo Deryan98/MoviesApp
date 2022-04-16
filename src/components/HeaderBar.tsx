@@ -20,7 +20,7 @@ export const HeaderBar = ({handleKeyPress, query}: Props) => {
         marginTop: 5,
       }}
       leftComponent={
-        <Text style={{color: Colors.accentColor, fontSize: 20}}>Movies</Text>
+        <Text style={{color: Colors.accentColor, fontSize: 20}}>Home</Text>
       }
       leftContainerStyle={{
         justifyContent: 'flex-start',

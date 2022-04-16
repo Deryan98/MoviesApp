@@ -1,19 +1,21 @@
 /* eslint-disable react-native/no-inline-styles */
 // import {useNavigation} from '@react-navigation/native';
+import {useRoute} from '@react-navigation/native';
 import React from 'react';
 import {ActivityIndicator, View, Dimensions, ScrollView} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import Carousel from 'react-native-snap-carousel';
-import {HorizontalSlider} from '../components/HorizontalSlider';
+import {VerticalSlider} from '../components/VerticalSlider';
 
-import {MoviePoster} from '../components/MoviePoster';
-import {useMovieSearch} from '../hooks/useMovieSearch';
+import {useMoviesSearch} from '../hooks/useMovieSearch';
 
 const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
 
 const SearchScreen = () => {
-  const {searchMovie, isLoading} = useMovieSearch();
+  const {moviesSearch, isLoading} = useMoviesSearch();
+
+  const route = useRoute();
+  const query = route.params;
 
   const {top} = useSafeAreaInsets();
 
@@ -29,22 +31,11 @@ const SearchScreen = () => {
   return (
     <ScrollView>
       <View style={{marginTop: top + 20}}>
-        {/* Carosel Principal
-        <View style={{height: windowHeight / 2}}>
-          <Carousel
-            data={nowPlaying}
-            renderItem={({item}: any) => <MoviePoster movie={item} />}
-            sliderWidth={windowWidth}
-            itemWidth={200}
-            inactiveSlideOpacity={0.9}
-          />
-        </View> */}
-        <HorizontalSlider
-          title="Popular"
-          movies={searchMovie}
+        <VerticalSlider
+          title={query}
+          movies={moviesSearch}
           horizontal={false}
         />
-        ]
       </View>
     </ScrollView>
   );

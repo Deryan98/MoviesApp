@@ -1,7 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 // import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {ActivityIndicator, View, Dimensions, ScrollView} from 'react-native';
+import {
+  ActivityIndicator,
+  View,
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+} from 'react-native';
+import {Text} from 'react-native-elements';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import Carousel from 'react-native-snap-carousel';
@@ -29,22 +36,23 @@ const HomeScreen = () => {
     );
   }
 
-  const handleKeyPress = val => {
+  const handleKeyPress = (val: React.SetStateAction<string>) => {
     setQuery(val);
   };
 
   return (
     <ScrollView>
-      {/* <HeaderBar handleKeyPress={handleKeyPress} /> */}
-      <View style={{marginTop: top + 20}}>
+      <HeaderBar query={query} handleKeyPress={handleKeyPress} />
+      <View style={{marginTop: 30}}>
         {/* Carosel Principal */}
-        <View style={{height: windowHeight / 2}}>
+        <View style={{height: windowHeight * 0.45}}>
           <Carousel
             data={nowPlaying}
             renderItem={({item}: any) => <MoviePoster movie={item} />}
             sliderWidth={windowWidth}
             itemWidth={200}
             inactiveSlideOpacity={0.9}
+            firstItem={1}
           />
         </View>
         <HorizontalSlider title="Popular" movies={popular} />
@@ -54,5 +62,15 @@ const HomeScreen = () => {
     </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  nowPlayingTitle: {
+    color: 'black',
+    fontSize: 15,
+    fontWeight: 'bold',
+    marginLeft: 10,
+    marginVertical: 10,
+  },
+});
 
 export default HomeScreen;

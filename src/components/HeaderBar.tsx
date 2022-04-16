@@ -1,42 +1,63 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {Header, Input} from 'react-native-elements';
+import {Header, Input, Text} from 'react-native-elements';
 import {useNavigation} from '@react-navigation/native';
-import Icon from 'react-native-vector-icons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../constants/Colors';
 
-export const HeaderBar = props => {
+interface Props {
+  handleKeyPress: (text: string) => void;
+  query: string;
+}
+
+export const HeaderBar = ({handleKeyPress, query}: Props) => {
   const navigation = useNavigation();
 
   return (
     <Header
-      backgroundColor={Colors.purplePrimayColor}
+      backgroundColor={Colors.primayColor}
       containerStyle={{
         marginTop: 5,
+      }}
+      leftComponent={
+        <Text style={{color: Colors.accentColor, fontSize: 20}}>Movies</Text>
+      }
+      leftContainerStyle={{
+        justifyContent: 'flex-start',
+        alignItems: 'center',
       }}
       centerComponent={
         <Input
           placeholder="Buscar"
-          placeholderTextColor="yellowgreen"
+          placeholderTextColor="a"
           selectionColor="yellowgreen"
           autoFocus={true}
-          onChangeText={value => props.handleKeyPress(value)}
+          containerStyle={{
+            width: '90%',
+            height: 50,
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+          }}
           rightIcon={
             <Icon
               name="search"
-              backgroundColor={Colors.greenAccentColor}
-              onPress={() => navigation.navigate('SearchScreen')}
+              backgroundColor={Colors.accentColor}
+              onPress={() => {
+                // console.log({query});
+                return navigation.push('SearchScreen', query);
+              }}
               size={30}
-              color={Colors.lightblueAccentColor}
+              color={Colors.accentColor}
               iconStyle={{
                 borderRadius: 30,
               }}
             />
           }
+          onChangeText={value => handleKeyPress(value)}
           inputStyle={{
-            color: Colors.greenAccentColor,
-            width: '100%',
+            color: Colors.accentColor,
           }}
+          autoCompleteType={undefined}
         />
       }
     />

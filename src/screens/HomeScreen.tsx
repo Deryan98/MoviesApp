@@ -6,6 +6,7 @@ import {
   Dimensions,
   ScrollView,
   StyleSheet,
+  ToastAndroid,
 } from 'react-native';
 
 import Carousel from 'react-native-snap-carousel';
@@ -29,8 +30,15 @@ const HomeScreen = () => {
   };
 
   const triggerQuery = () => {
-    navigation.push('SearchScreen', query);
-    setQuery('');
+    if (query) {
+      navigation.push('SearchScreen', query);
+    } else {
+      ToastAndroid.showWithGravity(
+        'Type a text before searching',
+        ToastAndroid.LONG,
+        ToastAndroid.BOTTOM,
+      );
+    }
     return;
   };
 

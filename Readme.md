@@ -18,7 +18,7 @@ Movies App is a small project made for interview technical process.
 
 ## development environment:
 
-Depending on the device you want to work with to develop in React Native, it will be the configuration that you will have to make.
+Depending on the device you want to work with to develop in React Native, it'll be the configuration that you will make.
 
 Since the project was only requested for Android, any operating system (Windows, Linux, Unix) will be useful.
 
@@ -30,7 +30,7 @@ A brief summary of the steps to be carried out since they are sections that have
 
 ## Installing packages.
 
-The project uses open source third-party libraries, which allow us to avoid reinventing the wheel. To find all these dependencies, you can place them in the root folder of the project, in the file called "package.json".
+The project uses open source third-party libraries, which allow us to avoid reinventing the wheel. To find all these dependencies, you can locate them in the root folder of the project, in the file called "package.json".
 
 To install the libraries open a console that uses the node "npm" package manager and type in the console: `npm install`
 
@@ -46,9 +46,6 @@ test your devices with command
 this whill show your physical and virtual devices
 
 In a terminal type the following command: `npx react-native run-android`
-and for iOS:
-`npx pod-install`
-`npx react-native run-ios`
 
 The following will happen:
 

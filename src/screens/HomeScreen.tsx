@@ -1,5 +1,5 @@
-import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+
+import React, { useContext } from 'react';
 import {
   ActivityIndicator,
   View,
@@ -15,11 +15,12 @@ import {HorizontalSlider} from '../components/HorizontalSlider';
 
 import {MoviePoster} from '../components/MoviePoster';
 import {useMovies} from '../hooks/useMovies';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AuthContext } from '../context/AuthCotext/AuthContext';
 
 const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
 
-const HomeScreen = () => {
-  const navigation = useNavigation();
+const HomeScreen = ({navigation}:{navigation: any}) => {
 
   const {nowPlaying, popular, topRated, upcoming, isLoading} = useMovies();
 
@@ -50,12 +51,17 @@ const HomeScreen = () => {
     );
   }
 
+  const { setNotAuthenticated } = useContext(AuthContext);
+  const logOut = () => {
+    AsyncStorage.removeItem('@token',() => setNotAuthenticated());
+  }
+
   return (
     <ScrollView>
       <HeaderBar
-        query={query}
         handleKeyPress={handleKeyPress}
         triggerQuery={triggerQuery}
+        handleLogOut={logOut}
       />
       {/* eslint-disable-next-line react-native/no-inline-styles */}
       <View style={{marginTop: 30}}>

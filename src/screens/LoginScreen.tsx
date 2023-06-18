@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import {StackScreenProps} from '@react-navigation/stack';
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -20,6 +20,7 @@ import {UIButton} from '../components/Buttons';
 import {UIInput} from '../components/Input';
 import {useForm} from '../hooks/useForm';
 import {Button, TextInput} from '@react-native-material/core';
+import { AuthContext } from '../context/AuthCotext/AuthContext';
 
 interface Props extends StackScreenProps<any, any> {}
 
@@ -29,15 +30,7 @@ const LoginScreen = ({navigation}: Props) => {
     password: '',
   });
 
-  useEffect(() => {
-    AsyncStorage.getItem('@token')
-      .then(token => {
-        if (token) navigation.replace('HomeScreen');
-      })
-      .catch(err => {
-        err;
-      });
-  }, []);
+  const {setAuthenticated} = useContext(AuthContext);
 
   const Login = async () => {
     try {
@@ -46,7 +39,8 @@ const LoginScreen = ({navigation}: Props) => {
         password,
       });
       await AsyncStorage.setItem('@token', resp.data.token);
-      navigation.replace('HomeScreen');
+      setAuthenticated()
+      // navigation.navigate('HomeScreen');
     } catch (error) {
       Alert.alert('Error', 'Please check the email or password');
     }

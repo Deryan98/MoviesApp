@@ -1,31 +1,43 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {StyleSheet} from 'react-native';
 import {Header, Input, Text} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../constants/Colors';
+import { useNavigation } from '@react-navigation/native';
+import { AuthContext } from '../context/AuthCotext/AuthContext';
 
 interface Props {
   handleKeyPress: (text: string) => void;
   triggerQuery: any;
-  query: string;
+  handleLogOut: () => void;
 }
 
-export const HeaderBar = ({handleKeyPress, triggerQuery}: Props) => {
+export const HeaderBar = ({handleKeyPress, triggerQuery, handleLogOut}: Props) => {
+
   return (
     <Header
       backgroundColor={Colors.primayColor}
       containerStyle={styles.containerStyle}
-      leftComponent={<Text style={styles.homeText}>Home</Text>}
-      leftContainerStyle={styles.leftContainerStyle}
+      rightComponent={ 
+        <Icon
+          name="log-out-outline"
+          onPress={() => handleLogOut()}
+          size={35}
+          color={Colors.danger}
+          
+        />
+      }
+      rightContainerStyle={styles.leftContainerStyle}
       centerComponent={
         <Input
-          placeholder="Buscar"
-          placeholderTextColor="a"
+          placeholder="Search a movie"
+          placeholderTextColor="white"
           selectionColor="yellowgreen"
           onSubmitEditing={triggerQuery}
           returnKeyLabel="Buscar"
           returnKeyType="search"
           containerStyle={styles.inputContainerStyle}
+          inputContainerStyle={{ borderBottomColor: 'transparent'}}
           rightIcon={
             <Icon
               name="search"
@@ -60,13 +72,17 @@ const styles = StyleSheet.create({
   inputContainerStyle: {
     width: '90%',
     height: 50,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    
   },
   iconStyle: {
     borderRadius: 30,
+
   },
   inputStyle: {
     color: Colors.accentColor,
+    borderBottomColor: 'white',
+    borderWidth: 1,
   },
 });

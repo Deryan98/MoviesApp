@@ -19,6 +19,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {UIButton} from '../components/Buttons';
 import {UIInput} from '../components/Input';
 import {useForm} from '../hooks/useForm';
+import {Button, TextInput} from '@react-native-material/core';
 
 interface Props extends StackScreenProps<any, any> {}
 
@@ -77,7 +78,22 @@ const LoginScreen = ({navigation}: Props) => {
             Movies App
           </Text>
 
-          <UIInput
+          <TextInput
+            variant="outlined"
+            label="Email"
+            style={{
+              marginBottom: 5,
+              width: '75%',
+            }}
+            autoCapitalize="none"
+            textContentType="emailAddress"
+            keyboardType="email-address"
+            onChangeText={value => onChange(value, 'email')}
+            returnKeyType="next"
+            value={email}
+          />
+
+          {/* <UIInput
             placeholder="Email"
             leftIconName="email"
             autoCapitalize="none"
@@ -85,19 +101,45 @@ const LoginScreen = ({navigation}: Props) => {
             keyboardType="email-address"
             onChangeText={value => onChange(value, 'email')}
             returnKeyType="next"
+            value={email}
+          /> */}
+
+          <TextInput
+            variant="outlined"
+            label="Password"
+            style={{
+              // margin: 16,
+              width: '75%',
+            }}
+            secureTextEntry={true}
+            onChangeText={value => onChange(value, 'password')}
+            returnKeyType="next"
+            value={password}
           />
 
-          <UIInput
+          {/* <UIInput
             placeholder="Password"
             secureTextEntry={true}
             leftIconName="lock"
             onChangeText={value => onChange(value, 'password')}
-          />
+            value={password}
+          /> */}
 
-          <UIButton
+          {/* <UIButton
             title="LOGIN"
             btnColor="black"
             type="solid"
+            onPress={() => onLogin()}
+          /> */}
+          <Button
+            title="Login"
+            color="on-secondary"
+            style={{
+              width: '75%',
+              marginTop: 30,
+              height: 50,
+              justifyContent: 'center',
+            }}
             onPress={() => onLogin()}
           />
         </View>

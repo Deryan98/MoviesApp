@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
-import {StackScreenProps} from '@react-navigation/stack';
-import React, {useContext, useEffect} from 'react';
+import { StackScreenProps } from '@react-navigation/stack';
+import React, { useContext, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -16,21 +16,19 @@ import {
 import loginApi from '../api/loginApi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import {UIButton} from '../components/Buttons';
-import {UIInput} from '../components/Input';
-import {useForm} from '../hooks/useForm';
-import {Button, TextInput} from '@react-native-material/core';
+import { useForm } from '../hooks/useForm';
+import { Box, Button, TextInput } from '@react-native-material/core';
 import { AuthContext } from '../context/AuthCotext/AuthContext';
 
-interface Props extends StackScreenProps<any, any> {}
+interface Props extends StackScreenProps<any, any> { }
 
-const LoginScreen = ({navigation}: Props) => {
-  const {email, password, onChange} = useForm({
+const LoginScreen = ({ navigation }: Props) => {
+  const { email, password, onChange } = useForm({
     email: '',
     password: '',
   });
 
-  const {setAuthenticated} = useContext(AuthContext);
+  const { setAuthenticated } = useContext(AuthContext);
 
   const Login = async () => {
     try {
@@ -52,12 +50,23 @@ const LoginScreen = ({navigation}: Props) => {
 
   return (
     <KeyboardAvoidingView
-      style={{flex: 1}}
+      style={{ flex: 1 }}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <ScrollView
-        contentContainerStyle={{flexGrow: 1}}
+        contentContainerStyle={{ flexGrow: 1 }}
         keyboardShouldPersistTaps="handled">
         <View style={styles.screen}>
+          <Box 
+            w={'100%'} 
+            h={200} 
+            m={0} 
+            style={{ 
+            position: 'absolute', 
+            backgroundColor: "purple",
+            borderBottomLeftRadius: 50,
+            borderBottomRightRadius: 50
+            }} />
+          
           <Image
             style={styles.logoImage}
             source={require('../assets/logo.png')}
@@ -130,9 +139,11 @@ const LoginScreen = ({navigation}: Props) => {
             color="on-secondary"
             style={{
               width: '75%',
-              marginTop: 30,
+              marginTop: 75,
               height: 50,
               justifyContent: 'center',
+              zIndex: 2
+              
             }}
             onPress={() => onLogin()}
           />
@@ -146,7 +157,8 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   screen: {
-    backgroundColor: '#E0E0E0',
+    // backgroundColor: '#E0E0E0',
+    backgroundColor: 'white',
     paddingTop: '20%',
     flex: 1,
     alignItems: 'center',
@@ -154,6 +166,7 @@ const styles = StyleSheet.create({
 
   logoImage: {
     margin: '5%',
+    marginTop: 70,
     marginBottom: '2%',
     width: 100,
     height: 100,
